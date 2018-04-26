@@ -6,7 +6,7 @@ import h5py
 
 RATIO = 3  # 放大比例
 IMAGE_SIZE = 17  # 训练图片大小
-STRIDE = 5  # 裁剪步长
+STRIDE = 8  # 裁剪步长
 IMAGE_CHANNEl = 3  # 图片通道
 
 

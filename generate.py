@@ -1,29 +1,10 @@
 import tensorflow as tf
-from espcn import ESPCN
-import prepare_data
 import os
-
-from PIL import ImageFilter
 from PIL import Image
 
-
-def sharpen_from_img_array(img_array):
-    """
-    锐化
-    """
-    img = Image.fromarray(img_array)
-    img = img.filter(ImageFilter.SHARPEN)
-    img.show()
-
-
-def edge_enhance_from_img_array(img_array):
-    """
-    边界加强
-    """
-    img = Image.fromarray(img_array)
-    img = img.filter(ImageFilter.EDGE_ENHANCE)
-    img.show()
-
+from espcn import ESPCN
+import prepare_data
+import util
 
 def generate(img_path):
     """
@@ -43,15 +24,15 @@ def generate(img_path):
         sr_image = espcn.generate(lr_image / 255.0)
 
     # lr image
-    prepare_data.show_img_from_array(lr_image)
+    util.show_img_from_array(lr_image)
     # original image
-    prepare_data.show_img_from_array(ori_image)
+    util.show_img_from_array(ori_image)
     # sr image
-    prepare_data.show_img_from_array(sr_image)
+    util.show_img_from_array(sr_image)
 
-    # sharpen_from_img_array(sr_image)
+    util.sharpen_from_img_array(sr_image)
 
-    # edge_enhance_from_img_array(sr_image)
+    # util.edge_enhance_from_img_array(sr_image)
 
 if __name__ == '__main__':
-    generate('./images/t66.jpg')
+    generate('./images/butterfly_GT.jpg')
