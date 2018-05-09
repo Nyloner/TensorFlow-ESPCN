@@ -15,7 +15,7 @@ ESPCN是一种在低分辨率图像上直接计算卷积得到高分辨率图像
 
 - 第一层卷积网络：输入(lr image) height * width * image_channel，filter size 为 5 * 5 ，深度为 64，输出为 height * width * 64
 - 第二层卷积网络：输入 height * width * 64，filter size 为 3 * 3，深度为 32，输出为 height * width * 32
-- 第三层亚像素卷积层：输入 height * width * 32，filter size 为 3 * 3，深度为 r * r * image_channel，输出为 height * width * (r * r * image_channel)
+- 第三层亚像素卷积层：输入 height * width * 32，filter size 为 3 * 3，深度为 r * r * image_channel，卷积操作输出为 height * width * (r * r * image_channel)，最后再经过PS重排，输出 (r * height) * (width * r) * image_channel
 
 TensorFlow 实现
 ```Python
