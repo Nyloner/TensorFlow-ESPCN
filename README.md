@@ -7,7 +7,7 @@ Convolutional Neural Network，CVPR 2016)算法，基于TensorFlow实现图像�
 
 ## ESPCN
 
-ESPCN是一种在低分辨率图像上直接计算卷积得到高分辨率图像的高效率方法，如下图所示，网络的输入是原始的低分辨率图像，通过三个卷积操作后，得到的特征图像大小与输入图像一样，但是特征通道为r^2(r是图像的目标放大倍数)。再经过最后亚像素卷积层(sub-pixel convolutional layer)操作，将每个像素的r^2个通道重新排列成一个r x r的区域，对应于高分辨率图像中的一个r x r大小的子块，从而大小为r^2 x H x W的特征图像被重新排列成1 x rH x rW大小的高分辨率图像。
+ESPCN是一种在低分辨率图像上直接计算卷积得到高分辨率图像的高效率方法，如下图所示，网络的输入是原始的低分辨率图像，通过三个卷积操作后，得到的特征图像大小与输入图像一样，但是特征通道为r^2(r是图像的目标放大倍数)。再经过最后PS操作，将每个像素的r^2个通道重新排列成一个r x r的区域，对应于高分辨率图像中的一个r x r大小的子块，从而大小为r^2 x H x W的特征图像被重新排列成1 x rH x rW大小的高分辨率图像。
 
 <img src="https://nyloner.cn/static/files/ESPCN%E5%8E%9F%E7%90%86.jpg" style="height:200px;width:700px">
 
@@ -15,8 +15,7 @@ ESPCN是一种在低分辨率图像上直接计算卷积得到高分辨率图像
 
 - 第一层卷积网络：输入(lr image) height * width * image_channel，filter size 为 5 * 5 ，深度为 64，输出为 height * width * 64
 - 第二层卷积网络：输入 height * width * 64，filter size 为 3 * 3，深度为 32，输出为 height * width * 32
-- 第三层卷积网络：输入 height * width * 32，filter size 为 3 * 3，深度为 r * r * image_channel，输出为 height * width * (r * r * image_channel)
-- 第四层亚像素卷积层：输入 height * width * (r * r * image_channel)，输出 (r * height) * (width * r) * image_channel
+- 第三层亚像素卷积层：输入 height * width * 32，filter size 为 3 * 3，深度为 r * r * image_channel，输出为 height * width * (r * r * image_channel)
 
 TensorFlow 实现
 ```Python
