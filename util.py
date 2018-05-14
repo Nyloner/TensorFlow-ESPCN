@@ -13,7 +13,8 @@ def show_img_from_array(img_data):
     img = Image.fromarray(img_data)
     img.show()
 
-def save_img_from_array(img_data,img_save_path):
+
+def save_img_from_array(img_data, img_save_path):
     """
     保存图片
     :param img_data:
@@ -21,6 +22,7 @@ def save_img_from_array(img_data,img_save_path):
     """
     img = Image.fromarray(img_data)
     img.save(img_save_path)
+
 
 def sharpen_from_img_array(img_array):
     """

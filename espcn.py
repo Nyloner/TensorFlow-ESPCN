@@ -18,8 +18,8 @@ class ESPCN:
         self.is_train = is_train
 
         self.batch_size = 100
-        self.learning_rate = 0.00001
-        self.epoch = 20
+        self.learning_rate = 0.0001
+        self.epoch = 70
         self.checkpoint_dir = 'checkpoint'
         self.train_data_path = self.checkpoint_dir + '/' + 'train_data.h5'
 
@@ -53,12 +53,12 @@ class ESPCN:
         # input image_height*image_width*image_channel
         # output image_height*image_width*64
 
-        with tf.variable_scope('layer1-conv1'):
+        with tf.variable_scope('layer1-conv1', reuse=tf.AUTO_REUSE):
             conv1_weights = tf.get_variable(
                 'weights',
                 shape=[5, 5, self.image_channel, 64],
                 initializer=tf.truncated_normal_initializer(
-                    stddev=np.sqrt(2.0 / 25 / 3))
+                    stddev=0.1)
             )
             conv1_bias = tf.get_variable(
                 'bias',
@@ -67,17 +67,17 @@ class ESPCN:
             )
             conv1_temp = tf.nn.bias_add(tf.nn.conv2d(
                 self.images, conv1_weights, strides=[1, 1, 1, 1], padding='SAME'), conv1_bias)
-            conv1 = tf.nn.tanh(conv1_temp)
+            conv1 = tf.nn.relu(conv1_temp)
 
         # 第二层卷积，filter size 3*3*32
         # input image_height*image_width*64
         # output image_height*image_width*32
-        with tf.variable_scope('layer2-conv2'):
+        with tf.variable_scope('layer2-conv2', reuse=tf.AUTO_REUSE):
             conv2_weights = tf.get_variable(
                 'weights',
                 shape=[3, 3, 64, 32],
                 initializer=tf.truncated_normal_initializer(
-                    stddev=np.sqrt(2.0 / 9 / 64))
+                    stddev=0.1)
             )
             conv2_bias = tf.get_variable(
                 'bias',
@@ -86,18 +86,18 @@ class ESPCN:
             )
             conv2_temp = tf.nn.bias_add(tf.nn.conv2d(
                 conv1, conv2_weights, strides=[1, 1, 1, 1], padding='SAME'), conv2_bias)
-            conv2 = tf.nn.tanh(conv2_temp)
+            conv2 = tf.nn.relu(conv2_temp)
 
-        # 第三层卷积，filter size 3*3*ratio*ratio*image_channel
+        # 第三层卷积，filter size 3*3*(ratio*ratio*image_channel)
         # input image_height*image_width*32
         # output image_height*image_width*ratio*ratio*image_channel
-        with tf.variable_scope('layer3-conv3'):
+        with tf.variable_scope('layer3-conv3', reuse=tf.AUTO_REUSE):
             conv3_weights = tf.get_variable(
                 'weights',
                 shape=[3, 3, 32,
                        self.ratio * self.ratio * self.image_channel],
                 initializer=tf.truncated_normal_initializer(
-                    stddev=np.sqrt(2.0 / 9 / 32))
+                    stddev=0.1)
             )
             conv3_bias = tf.get_variable(
                 'bias',

@@ -6,7 +6,7 @@ import h5py
 
 RATIO = 3  # 放大比例
 IMAGE_SIZE = 17  # 训练图片大小
-STRIDE = 8  # 裁剪步长
+STRIDE = 5  # 裁剪步长
 IMAGE_CHANNEl = 3  # 图片通道
 
 
@@ -51,7 +51,7 @@ def make_sub_data(img_list):
         for x in range(0, h - IMAGE_SIZE + 1, STRIDE):
             for y in range(0, w - IMAGE_SIZE + 1, STRIDE):
                 sub_input = input_[x: x + IMAGE_SIZE,
-                            y: y + IMAGE_SIZE]
+                                   y: y + IMAGE_SIZE]
                 sub_input = sub_input.reshape(
                     [IMAGE_SIZE, IMAGE_SIZE, IMAGE_CHANNEl])
                 sub_input = sub_input / 255.0
@@ -60,7 +60,7 @@ def make_sub_data(img_list):
                 label_x = x * RATIO
                 label_y = y * RATIO
                 sub_label = label_[label_x: label_x + IMAGE_SIZE * RATIO,
-                            label_y: label_y + IMAGE_SIZE * RATIO]
+                                   label_y: label_y + IMAGE_SIZE * RATIO]
                 sub_label = sub_label.reshape(
                     [IMAGE_SIZE * RATIO, IMAGE_SIZE * RATIO, IMAGE_CHANNEl])
                 sub_label = sub_label / 255.0
