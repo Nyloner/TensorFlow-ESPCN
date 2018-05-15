@@ -17,7 +17,10 @@ def generate(img_name):
     :return:
     """
     lr_image, ori_image = prepare_data.preprocess_img(TEST_IMAGE_DIR+img_name)
-    image_height, image_width, _ = lr_image.shape
+    try:
+        image_height, image_width, _ = lr_image.shape
+    except:
+        return
     with tf.Session() as sess:
         espcn = ESPCN(sess,
                       is_train=False,
@@ -43,6 +46,6 @@ def generate(img_name):
 
 if __name__ == '__main__':
     img_list = [filename for filename in os.listdir(
-        TEST_IMAGE_DIR) if filename.endswith('bmp')]
+        TEST_IMAGE_DIR) if filename.endswith('jpg')]
     for filename in img_list:
         generate(filename)

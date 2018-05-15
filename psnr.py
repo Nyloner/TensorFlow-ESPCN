@@ -18,15 +18,15 @@ def psnr(image_a, image_b):
 
 if __name__ == '__main__':
     img_list = [filename for filename in os.listdir(
-        TEST_IMAGE_DIR) if filename.endswith('bmp')]
+        TEST_IMAGE_DIR) if filename.endswith('jpg')]
     for img_name in img_list:
         try:
             hr_image = Image.open(
-                TEST_RESULT_DIR+img_name.replace('.bmp', '_hr.bmp'))
+                TEST_RESULT_DIR+img_name.replace('.jpg', '_hr.jpg'))
             sr_image = Image.open(
-                TEST_RESULT_DIR+img_name.replace('.bmp', '_sr.bmp'))
+                TEST_RESULT_DIR+img_name.replace('.jpg', '_sr.jpg'))
             lr_image = Image.open(
-                TEST_RESULT_DIR+img_name.replace('.bmp', '_lr.bmp'))
+                TEST_RESULT_DIR+img_name.replace('.jpg', '_lr.jpg'))
         except:
             continue
         bi_image = lr_image.resize(sr_image.size, Image.BICUBIC)

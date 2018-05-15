@@ -89,7 +89,7 @@ def prepare_data(dataset='images'):
     :return:
     """
     data_dir = os.path.join(os.getcwd(), dataset)
-    filenames = glob.glob(os.path.join(data_dir, "*.bmp"))
+    filenames = glob.glob(os.path.join(data_dir, "*.jpg"))
     sub_input_sequence, sub_label_sequence = make_sub_data(filenames)
 
     arrinput = np.asarray(sub_input_sequence)
