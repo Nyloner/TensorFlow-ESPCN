@@ -19,7 +19,7 @@ class ESPCN:
 
         self.batch_size = 100
         self.learning_rate = 0.0001
-        self.epoch = 70
+        self.epoch = 100
         self.checkpoint_dir = 'checkpoint'
         self.train_data_path = self.checkpoint_dir + '/' + 'train_data.h5'
 
