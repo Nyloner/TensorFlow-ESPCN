@@ -3,8 +3,8 @@ import math
 from PIL import Image
 import os
 
-TEST_IMAGE_DIR = './test_images/Set5/'
-TEST_RESULT_DIR = './result/Set5/'
+TEST_IMAGE_DIR = './test_images/Set14/'
+TEST_RESULT_DIR = './result/Set14/'
 
 
 def psnr(image_a, image_b):

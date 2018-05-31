@@ -1,0 +1,6 @@
+__pycache__
+.idea
+checkpoint
+*.pyc
+.DS_Store
+result
